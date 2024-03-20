@@ -22,6 +22,27 @@ def register():
     :return: None
     """
     # TODO
+    message = {'action': 'register', 'ip': ANTHILL_HOST, 'port': ANTHILL_PORT, 'type': 'hive'}
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((DISCOVERY_HOST, DISCOVERY_PORT))
+        data = s.accept()
+        print(data)
+
+
+
+
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind((ANTHILL_HOST, ANTHILL_PORT))
+        s.listen(1)
+        conn, addr = s.accept()
+        with conn:
+            print('Connected by', addr)
+            while True:
+                data = conn.recv(1024)
+                if not data: break
+                conn.sendall(data)
+
     pass
 
 
